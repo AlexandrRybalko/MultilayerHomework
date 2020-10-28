@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Products.Domain.Models
+namespace Products.Models.PostModels
 {
-    public class Product
+    public class ProductPostModel
     {
         public int Id { get; set; }
         public string Name { get; set; }

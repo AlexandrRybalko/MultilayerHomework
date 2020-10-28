@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WarehouseProducts.Domain.Models;
+using Products.Domain.Models;
 
-namespace WarehouseProducts.Domain
+namespace Products.Domain
 {
     public class ProductRepository
     {
@@ -30,7 +30,7 @@ namespace WarehouseProducts.Domain
                     return p;
                 }
             }
-            return null;
+            throw new Exception("No product whith this Id");
         }
     }
 }
