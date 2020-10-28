@@ -8,5 +8,6 @@ namespace WarehouseProducts.Domain.Services
 {
     public class ProductService
     {
+
     }
 }
