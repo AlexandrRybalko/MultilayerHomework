@@ -27,7 +27,7 @@ namespace Products.Domain
 
         public Product GetById(int id)
         {
-            var result = Products.Where(x => x.Id == id).FirstOrDefault();
+            var result = Products.FirstOrDefault(x => x.Id == id);
             return result;
         }
     }
