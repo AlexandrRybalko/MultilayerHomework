@@ -45,7 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ProductController.cs" />
-    <Compile Include="Models\PostModels\ProductPostModel.cs" />
+    <Compile Include="Models\PostModels\CreateProductPostModel.cs" />
+    <Compile Include="Models\ViewModels\GetProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -58,9 +59,7 @@
       <Name>Products.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>

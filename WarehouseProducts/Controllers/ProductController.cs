@@ -3,6 +3,7 @@ using AutoMapper;
 using Products.Domain.Models;
 using Products.Domain.Services;
 using Products.Models.PostModels;
+using WarehouseProducts.Models.ViewModels;
 
 namespace Products
 {
@@ -16,14 +17,17 @@ namespace Products
 
             var mapperConfig = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<ProductPostModel, ProductModel>();
-                cfg.CreateMap<ProductPostModel, ProductModel>().ReverseMap();
+                cfg.CreateMap<CreateProductPostModel, ProductModel>();
+                cfg.CreateMap<CreateProductPostModel, ProductModel>().ReverseMap();
+
+                cfg.CreateMap<GetProductViewModel, ProductModel>();
+                cfg.CreateMap<GetProductViewModel, ProductModel>().ReverseMap();
             });
 
             _mapper = new Mapper(mapperConfig);
         }
 
-        public void CreateProductRequest(ProductPostModel model)
+        public void CreateProductRequest(CreateProductPostModel model)
         {
             if (string.IsNullOrWhiteSpace(model.Name))
             {
@@ -39,14 +43,14 @@ namespace Products
             _productService.CreateProductRequest(productModel);
         }
 
-        public ProductPostModel GetProductById(int id)
+        public GetProductViewModel GetProductById(int id)
         {
             if(id <= 0)
             {
                 throw new Exception("Invalid id");
             }
 
-            var result = _mapper.Map<ProductPostModel>(_productService.GetProductByIdRequest(id));
+            var result = _mapper.Map<GetProductViewModel>(_productService.GetProductByIdRequest(id));
             return result;
         }
     }

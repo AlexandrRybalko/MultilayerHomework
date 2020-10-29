@@ -14,16 +14,19 @@ namespace MultilayerHomework
         {
             var controller = new ProductController();
 
-            var model = new ProductPostModel()
+            var model = new CreateProductPostModel()
             {
-                Id = 1,
                 Name = "Brick",
                 DeliveryDate = DateTime.Now,
                 Price = 1200
             };
-            controller.CreateProductRequest(model);
 
-            var product = controller.GetProductById(0);
+            for(int i = 1; i < 12; i++)
+            {
+                controller.CreateProductRequest(model);
+            }
+
+            var product = controller.GetProductById(1);
         }
     }
 }

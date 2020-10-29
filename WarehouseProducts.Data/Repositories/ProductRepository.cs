@@ -10,27 +10,25 @@ namespace Products.Domain
     public class ProductRepository
     {
         private List<Product> Products { get; set; }
+        private int _idCount;
 
         public ProductRepository()
         {
             Products = new List<Product>();
+            _idCount = 1;
         }
 
         public void Create(Product model)
         {
+            model.Id = _idCount;
             Products.Add(model);
+            _idCount++;
         }
 
         public Product GetById(int id)
         {
-            foreach(var p in Products)
-            {
-                if(p.Id == id)
-                {
-                    return p;
-                }
-            }
-            throw new Exception("No product whith this Id");
+            var result = Products.Where(x => x.Id == id).FirstOrDefault();
+            return result;
         }
     }
 }
