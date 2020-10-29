@@ -25,7 +25,6 @@ namespace Products.Domain.Services
         }
         public void CreateProductRequest(ProductModel model)
         {
-            //if
 
             var product = _mapper.Map<Product>(model);
             _productRepository.Create(product);
