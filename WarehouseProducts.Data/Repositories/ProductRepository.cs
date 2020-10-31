@@ -11,11 +11,20 @@ namespace Products.Domain
     {
         private List<Product> Products { get; set; }
         private int _idCount;
-
+        private int Capacity;
         public ProductRepository()
         {
             Products = new List<Product>();
             _idCount = 1;
+            Capacity = 0;
+        }
+        public bool HasSpace()
+        {
+            if(Capacity == 10)
+            {
+                return false;
+            }
+            return true;
         }
 
         public void Create(Product model)
@@ -23,6 +32,7 @@ namespace Products.Domain
             model.Id = _idCount;
             Products.Add(model);
             _idCount++;
+            Capacity++;
         }
 
         public Product GetById(int id)

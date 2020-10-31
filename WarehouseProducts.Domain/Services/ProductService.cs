@@ -12,8 +12,6 @@ namespace Products.Domain.Services
     {
         private readonly ProductRepository _productRepository;
         private readonly IMapper _mapper;
-        private int Capacity = 0;
-        public const int MaxCapacity = 10;
         public ProductService()
         {
             _productRepository = new ProductRepository();
@@ -27,15 +25,13 @@ namespace Products.Domain.Services
         }
         public void CreateProductRequest(ProductModel model)
         {
-            if(Capacity == MaxCapacity)
+            if(!_productRepository.HasSpace())
             {
                 throw new Exception("Max capacity reached");
             }
 
             var product = _mapper.Map<Product>(model);
             _productRepository.Create(product);
-
-            Capacity++;
         }
 
         public ProductModel GetProductByIdRequest(int id)
