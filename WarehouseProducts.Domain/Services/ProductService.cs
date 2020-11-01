@@ -14,7 +14,7 @@ namespace Products.Domain.Services
         private readonly IMapper _mapper;
         public ProductService()
         {
-            _productRepository = new ProductRepositoryADONet();
+            _productRepository = new ProductRepositoryDapper();
 
             var mapperConfig = new MapperConfiguration(cfg =>
             {

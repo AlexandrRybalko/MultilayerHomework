@@ -1,12 +1,12 @@
-﻿using Products.Data.Interfaces;
+﻿using Dapper;
+using Products.Data.Interfaces;
 using Products.Data.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace WarehouseProducts.Data.Repositories
+namespace Products.Data.Repositories
 {
     public class ProductRepositoryDapper : IProductRepository
     {
@@ -19,17 +19,37 @@ namespace WarehouseProducts.Data.Repositories
         }
         public Product Create(Product model)
         {
-            throw new NotImplementedException();
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var sqlQuery = $"INSERT INTO Products(Name, DeliveryDate, Price) VALUES('{model.Name}'," 
+                    + $"\'{model.DeliveryDate.ToString("s")}\', {model.Price});" 
+                    + $"SELECT CAST(SCOPE_IDENTITY() AS INT)";
+
+                int id = connection.Query<int>(sqlQuery, model).FirstOrDefault();
+                model.Id = id;
+            }
+
+            return model;
         }
 
         public IEnumerable<Product> GetAll()
         {
-            throw new NotImplementedException();
+            using(SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                return connection.Query<Product>("SELECT * FROM Products");
+            }
         }
 
         public Product GetById(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                return connection.Query<Product>($"SELECT * FROM Products WHERE Id={id}").FirstOrDefault();
+            }
         }
 
         public bool HasSpace()
