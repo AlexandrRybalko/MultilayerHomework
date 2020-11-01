@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using AutoMapper;
 using Products.Domain.Models;
 using Products.Domain.Services;
 using Products.Models.PostModels;
-using WarehouseProducts.Models.ViewModels;
+using Products.Models.ViewModels;
 
 namespace Products
 {
@@ -18,16 +19,13 @@ namespace Products
             var mapperConfig = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<CreateProductPostModel, ProductModel>();
-                cfg.CreateMap<CreateProductPostModel, ProductModel>().ReverseMap();
-
-                cfg.CreateMap<GetProductViewModel, ProductModel>();
                 cfg.CreateMap<GetProductViewModel, ProductModel>().ReverseMap();
             });
 
             _mapper = new Mapper(mapperConfig);
         }
 
-        public void CreateProductRequest(CreateProductPostModel model)
+        public GetProductViewModel CreateProductRequest(CreateProductPostModel model)
         {
             if (string.IsNullOrWhiteSpace(model.Name))
             {
@@ -39,8 +37,10 @@ namespace Products
             }
 
             var productModel = _mapper.Map<ProductModel>(model);
+            var createdProductModel = _productService.CreateProductRequest(productModel);
+            var result = _mapper.Map<GetProductViewModel>(createdProductModel);
 
-            _productService.CreateProductRequest(productModel);
+            return result;
         }
 
         public GetProductViewModel GetProductById(int id)
@@ -51,6 +51,13 @@ namespace Products
             }
 
             var result = _mapper.Map<GetProductViewModel>(_productService.GetProductByIdRequest(id));
+            return result;
+        }
+
+        public IEnumerable<GetProductViewModel> GetAllProducts()
+        {
+            var result = _mapper.Map<IEnumerable<GetProductViewModel>>(_productService.GetAllProductsRequest());
+
             return result;
         }
     }

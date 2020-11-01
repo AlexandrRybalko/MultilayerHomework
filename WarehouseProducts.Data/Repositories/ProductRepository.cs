@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Products.Domain.Models;
+using Products.Data.Models;
 
-namespace Products.Domain
+namespace Products.Data
 {
     public class ProductRepository
     {
@@ -20,7 +20,7 @@ namespace Products.Domain
         }
         public bool HasSpace()
         {
-            if(Capacity == 10)
+            if (Capacity == 10)
             {
                 return false;
             }
