@@ -21,7 +21,7 @@ namespace MultilayerHomework
                 Price = 1200
             };
 
-            var product = controller.CreateProductRequest(model);
+            var product = controller.GetProductById(3);
         }
     }
 }

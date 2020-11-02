@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Products.Data.Models;
 
 namespace Products.Data
@@ -20,7 +17,7 @@ namespace Products.Data
         }
         public bool HasSpace()
         {
-            if (Capacity == 10)
+            if (Capacity >= 10)
             {
                 return false;
             }

@@ -1,7 +1,6 @@
 ﻿using Dapper;
 using Products.Data.Interfaces;
 using Products.Data.Models;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -47,8 +46,8 @@ namespace Products.Data.Repositories
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-
-                return connection.Query<Product>($"SELECT * FROM Products WHERE Id={id}").FirstOrDefault();
+                
+                return connection.QueryFirst<Product>($"SELECT * FROM Products WHERE Id={id}");
             }
         }
 

@@ -40,14 +40,16 @@ namespace Products.Domain.Services
 
         public ProductModel GetProductByIdRequest(int id)
         {
-            var result = _mapper.Map<ProductModel>(_productRepository.GetById(id));
+            var product = _productRepository.GetById(id);
+            var result = _mapper.Map<ProductModel>(product);
 
             return result;
         }
 
         public IEnumerable<ProductModel> GetAllProductsRequest()
         {
-            var result = _mapper.Map<IEnumerable<ProductModel>>(_productRepository.GetAll());
+            var allProducts = _productRepository.GetAll();
+            var result = _mapper.Map<IEnumerable<ProductModel>>(allProducts);
 
             return result;
         }

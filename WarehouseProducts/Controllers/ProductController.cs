@@ -50,13 +50,15 @@ namespace Products
                 throw new Exception("Invalid id");
             }
 
-            var result = _mapper.Map<GetProductViewModel>(_productService.GetProductByIdRequest(id));
+            var product = _productService.GetProductByIdRequest(id);
+            var result = _mapper.Map<GetProductViewModel>(product);
             return result;
         }
 
         public IEnumerable<GetProductViewModel> GetAllProducts()
         {
-            var result = _mapper.Map<IEnumerable<GetProductViewModel>>(_productService.GetAllProductsRequest());
+            var allProducts = _productService.GetAllProductsRequest();
+            var result = _mapper.Map<IEnumerable<GetProductViewModel>>(allProducts);
 
             return result;
         }
